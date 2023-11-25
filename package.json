@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Backend para el Proyecto Final \"Restaurante LARANA\"",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
     "dev": "node --env-file=.env --watch src/index.js",
     "build": "esbuild src/index.js --bundle --platform=node --outfile=dist/index.cjs --minify",
@@ -15,5 +16,10 @@
     "RollingCode"
   ],
   "author": "Restaurante LARANA",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0"
+  }
 }
