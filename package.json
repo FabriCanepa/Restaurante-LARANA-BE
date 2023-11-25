@@ -1,0 +1,19 @@
+{
+  "name": "restaurante-larana-be",
+  "version": "1.0.0",
+  "description": "Backend para el Proyecto Final \"Restaurante LARANA\"",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "node --env-file=.env --watch src/index.js",
+    "build": "esbuild src/index.js --bundle --platform=node --outfile=dist/index.cjs --minify",
+    "start": "node --env-file=.env dist/index.cjs",
+    "lint": "eslint . --fix"
+  },
+  "keywords": [
+    "Backend",
+    "Larana",
+    "RollingCode"
+  ],
+  "author": "Restaurante LARANA",
+  "license": "ISC"
+}
