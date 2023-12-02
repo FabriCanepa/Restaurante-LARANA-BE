@@ -4,7 +4,7 @@ import cors from 'cors';
 
 import userRouter from './routes/userRoutes.js';
 
-
+import './database/database.js';
 
 // 1. inicio app
 const app = express();
