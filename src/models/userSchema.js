@@ -23,6 +23,8 @@ const User = new mongoose.Schema({
     type: String,
     required: true,
   },
+  isActive: Boolean,
+  isAdmin: Boolean,
 });
 
 export default mongoose.model('Users', User);
