@@ -41,7 +41,7 @@ export const postProduct = async (req, res) => {
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,
-        message: 'El nombre de producto ya está en uso perra.',
+        message: 'El nombre de producto ya está en uso',
       });
       return;
     }
