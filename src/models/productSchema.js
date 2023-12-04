@@ -5,7 +5,6 @@ const Product = new mongoose.Schema({
     type: String,
     required: true,
   },
-
   name: {
     type: String,
     required: true,
@@ -14,7 +13,6 @@ const Product = new mongoose.Schema({
   cost: {
     type: Number,
     required: true,
-
   },
   ingredients: {
     type: String,

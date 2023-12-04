@@ -1,10 +1,10 @@
 import express from 'express';
 
 import {
-  deleteProduct,
   getProducts,
   postProduct,
   putProduct,
+  deleteProduct,
 } from '../controllers/productController.js';
 
 import { validateBody } from '../middlewares/validatebody.js';
@@ -25,7 +25,6 @@ router.post(
   '/',
   isAuthenticated,
   isAdmin,
-
   (req, res, next) => validateBody(req, res, next, post_productSchema),
   postProduct,
 );

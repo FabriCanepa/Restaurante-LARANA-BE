@@ -16,7 +16,7 @@ export const post_productSchema = Joi.object({
       '*': 'Revisa el campo name',
     }),
   cost: Joi.number().required().messages({
-    'any.required': 'El campo const es requerido',
+    'any.required': 'El campo cost es requerido',
     '*': 'Revisa el campo const',
   }),
   ingredients: Joi.string().trim().min(5).max(500)

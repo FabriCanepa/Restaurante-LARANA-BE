@@ -1,6 +1,7 @@
 export const isAdmin = (req, res, next) => {
-  const { user } = req;
-
+  const {
+    user,
+  } = req;
   if (!user.isAdmin) {
     res.status(403).json({
       data: null,
@@ -8,6 +9,5 @@ export const isAdmin = (req, res, next) => {
     });
     return;
   }
-
   next();
 };
