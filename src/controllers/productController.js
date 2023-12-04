@@ -1,8 +1,8 @@
-import ProductModel from '../models/productSchema.js';
+import productModel from '../models/productSchema.js';
 
 export const getProducts = async (_, res) => {
   try {
-    const data = await ProductModel.find({});
+    const data = await productModel.find({});
 
     const filteredData = data
       .filter((product) => product._doc.isActive === true)
@@ -23,17 +23,16 @@ export const getProducts = async (_, res) => {
 export const postProduct = async (req, res) => {
   const { body } = req;
 
-  const newProduct = ProductModel({
+  const newProduct = productModel({
     image: body.image,
     name: body.name,
     cost: body.cost,
     ingredients: body.ingredients,
-    isAvailable: true,
-    isOrdered: false,
     isActive: true,
   });
   try {
     await newProduct.save();
+
     res.status(201).json({
       data: null,
       message: 'Producto creado exitosamente.',
@@ -42,13 +41,13 @@ export const postProduct = async (req, res) => {
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,
-        message: 'El nombre de pruducto ya está en uso.',
+        message: 'El nombre de producto ya está en uso perra.',
       });
       return;
     }
     res.status(500).json({
       data: null,
-      message: 'Ocurrió un error guardando el Producto.',
+      message: 'Ocurrió un error guardando el producto.',
     });
   }
 };
@@ -60,7 +59,7 @@ export const putProduct = async (req, res) => {
   } = req;
 
   try {
-    const action = await ProductModel.updateOne({ _id: id }, body);
+    const action = await productModel.updateOne({ _id: id }, body);
 
     if (action.matchedCount === 0) {
       res.status(400).json({
@@ -72,20 +71,20 @@ export const putProduct = async (req, res) => {
 
     res.json({
       data: null,
-      message: 'El prducto ha sido actualizado exitosamente',
+      message: 'El producto ha sido actualizado exitosamente',
     });
   } catch (e) {
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,
-        message: 'El nombre del producto ya está en uso',
+        message: 'El nombre de producto ya está en uso',
       });
       return;
     }
 
     res.status(500).json({
       data: null,
-      message: 'Ocurrió un error actualizando el pruducto',
+      message: 'Ocurrió un error actualizando el producto',
     });
   }
 };
@@ -96,7 +95,7 @@ export const deleteProduct = async (req, res) => {
   } = req;
 
   try {
-    const action = await ProductModel.updateOne(
+    const action = await productModel.updateOne(
       { _id: id, isActive: true },
       { isActive: false },
     );
