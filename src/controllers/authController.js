@@ -7,11 +7,11 @@ const { JWT_SECRET_KEY } = process.env;
 
 export const postLogin = async (req, res) => {
   const {
-    body: { username, password },
+    body: { email, password },
   } = req;
 
   try {
-    const userInDB = await UserModel.findOne({ username, isActive: true });
+    const userInDB = await UserModel.findOne({ email, isActive: true });
 
     if (!userInDB || !bcrypt.compareSync(password, userInDB.password)) {
       res.status(400).json({
