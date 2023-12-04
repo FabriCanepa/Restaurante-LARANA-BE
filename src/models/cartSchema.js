@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const Product = new mongoose.Schema({
+const Cart = new mongoose.Schema({
   image: {
     type: String,
     required: true,
@@ -22,4 +22,4 @@ const Product = new mongoose.Schema({
   isActive: Boolean,
 });
 
-export default mongoose.model('Products', Product);
+export default mongoose.model('cart', Cart);
