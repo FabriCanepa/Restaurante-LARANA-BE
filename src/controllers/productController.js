@@ -3,12 +3,15 @@ import productModel from '../models/productSchema.js';
 export const getProducts = async (_, res) => {
   try {
     const data = await productModel.find({});
-
     const filteredData = data
       .filter((product) => product._doc.isActive === true)
       .map((product) => ({
-        ...product._doc,
-        isActive: undefined,
+        id: product._doc._id,
+        image: product._doc.image,
+        name: product._doc.name,
+        cost: product._doc.cost,
+        ingredients: product._doc.ingredients,
+
       }));
 
     res.json({ data: filteredData, message: 'Productos encontrados' });
