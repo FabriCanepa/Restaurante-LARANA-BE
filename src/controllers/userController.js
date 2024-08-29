@@ -8,9 +8,13 @@ export const getUsers = async (_, res) => {
     const filteredData = data
       .filter((user) => user._doc.isActive === true)
       .map((user) => ({
-        ...user._doc,
-        password: undefined,
-        isActive: undefined,
+        id: user._doc._id,
+        _id: undefined,
+        firstname: user._doc.firstname,
+        lastname: user._doc.lastname,
+        username: user._doc.username,
+        email: user._doc.email,
+        isAdmin: user._doc.isAdmin,
       }));
 
     res.json({ data: filteredData, message: 'Usuarios encontrados' });
@@ -46,7 +50,7 @@ export const postUser = async (req, res) => {
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,
-        message: 'El nombre de usuario ya está en uso.',
+        message: 'El correo ya está en uso.',
       });
       return;
     }
