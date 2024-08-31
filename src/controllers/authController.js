@@ -12,13 +12,13 @@ export const postLogin = async (req, res) => {
 
   try {
     const userInDB = await UserModel.findOne({ email, isActive: true });
-    // if (!userInDB || !bcrypt.compareSync(password, userInDB.password)) {
-    //   res.status(400).json({
-    //     data: null,
-    //     message: 'Usuario o contraseña incorrecta.',
-    //   });
-    //   return;
-    // }
+    if (!userInDB || !bcrypt.compareSync(password, userInDB.password)) {
+      res.status(400).json({
+        data: null,
+        message: 'Usuario o contraseña incorrecta.',
+      });
+      return;
+    }
 
     const userInfo = {
       user: {
