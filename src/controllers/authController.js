@@ -13,16 +13,21 @@ export const postLogin = async (req, res) => {
   try {
     const userInDB = await UserModel.findOne({ email, isActive: true });
     
+    // Verificar si el usuario existe
     if (!userInDB) {
-      
       return res.status(400).json({
         data: null,
         message: 'Usuario no encontrado.',
       });
     }
 
-    if (!bcrypt.compareSync(password, userInDB.password)) {
-      
+    
+    console.log('Hash almacenado:', userInDB.password);
+
+    
+    const isPasswordCorrect = bcrypt.compareSync(password, userInDB.password);
+
+    if (!isPasswordCorrect) {
       return res.status(400).json({
         data: null,
         message: 'Contraseña incorrecta.',
