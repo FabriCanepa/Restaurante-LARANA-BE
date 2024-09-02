@@ -20,7 +20,7 @@ export const isAuthenticated = (req, res, next) => {
   try {
     const payload = jwt.verify(token, JWT_SECRET_KEY);
 
-    req.user = payload;
+    req.user = payload.user;
     next();
   } catch (e) {
     res.status(401).json({
