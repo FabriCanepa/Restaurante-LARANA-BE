@@ -34,7 +34,6 @@ export const post_orderSchema = Joi.object({
               }),
           isAvailable: Joi.boolean(),
         })).required(),
-        tablenumber: Joi.number(),
         userId: Joi.string().required().messages({
             'any.required': 'The "userId" field is required.',
             '*': 'Check the "description" field.',

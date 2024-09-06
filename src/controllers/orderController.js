@@ -28,7 +28,6 @@ export const postOrder = async (req, res) => {
 
   const newOrder = new OrderModel({
     productsOrdered: body.productsOrdered,
-    tablenumber: body.tablenumber,
     userId: body.userId,
     isActive: true,
   });
