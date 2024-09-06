@@ -10,16 +10,16 @@ const Order = new mongoose.Schema({
       type: String,
       required: true,
     },
-    price: {
-      type: Number,
+    cost: {
+      type: Number,  
       required: true,
     },
-    description: {
-      type: String,
+    ingredients: {
+      type: String,  
       required: true,
     },
-    amount: {
-      type: Number,
+    quantity: {
+      type: Number,  
       required: true,
     },
     isAvailable: Boolean,

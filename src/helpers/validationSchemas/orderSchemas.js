@@ -16,21 +16,21 @@ export const post_orderSchema = Joi.object({
                 'any.required': 'The "image" field is required.',
                 '*': 'Check the "image" field.',
               }),
-          price: Joi.number().required().messages({
-                'any.required': 'The "price" field is required.',
-                '*': 'Check the "price" field.',
+          cost: Joi.number().required().messages({
+                'any.required': 'The "cost" field is required.',
+                '*': 'Check the "cost" field.',
               }),
-          description: Joi.string().trim().min(3).max(100)
+          ingredients: Joi.string().trim().min(3).max(100)
           .required()
           .messages({
-                'string.min': 'The "description" field must have at least 3 characters.',
-                'string.max': 'The "description" field must have at least 3 characters.',
-                'any.required': 'The "description" field is required.',
-                '*': 'Check the "description" field.',
+                'string.min': 'The "ingredients" field must have at least 3 characters.',
+                'string.max': 'The "ingredients" field must have at least 3 characters.',
+                'any.required': 'The "ingredients" field is required.',
+                '*': 'Check the "ingredients" field.',
               }),
-          amount: Joi.number().required().messages({
-                'any.required': 'The "amount" field is required.',
-                '*': 'Check the "amount" field.',
+          quantity: Joi.number().required().messages({
+                'any.required': 'The "quantity" field is required.',
+                '*': 'Check the "quantity" field.',
               }),
           isAvailable: Joi.boolean(),
         })).required(),
