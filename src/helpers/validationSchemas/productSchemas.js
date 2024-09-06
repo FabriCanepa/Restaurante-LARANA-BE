@@ -27,6 +27,9 @@ export const post_productSchema = Joi.object({
       'any.required': 'El campo ingredients es requerido',
       '*': 'Revisa el campo ingredients',
     }),
+    isAvailable: Joi.boolean().optional().messages({
+      '*': 'Revisa el campo isAvailable',
+    }),
 });
 
 export const put_productSchema = Joi.object({
@@ -48,6 +51,9 @@ export const put_productSchema = Joi.object({
       'string.min': 'El campo ingredients debe tener al menos 5 caracteres',
       'string.max': 'El campo ingredients debe tener, como mucho, 500 caracteres',
       '*': 'Revisa el campo ingredients',
+    }),
+    isAvailable: Joi.boolean().optional().messages({
+      '*': 'Revisa el campo isAvailable',
     }),
 }).custom((value, helper) => {
   const {
