@@ -13,6 +13,7 @@ export const getProducts = async (_, res) => {
         name: product._doc.name,
         cost: product._doc.cost,
         ingredients: product._doc.ingredients,
+        isAvailable: product._doc.isAvailable
 
       }));
 
