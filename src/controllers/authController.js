@@ -22,7 +22,7 @@ export const postLogin = async (req, res) => {
 
     const userInfo = {
       user: {
-        id: userInDB._doc.id,
+        id: userInDB._doc._id,
         firstname: userInDB._doc.firstname,
         lastname: userInDB._doc.lastname,
         username: userInDB._doc.username,
