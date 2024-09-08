@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import UserModel from '../models/userSchema.js';
+import { jwtDecode } from 'jwt-decode';
 
 export const getUsers = async (_, res) => {
   try {
@@ -40,24 +41,36 @@ export const postUser = async (req, res) => {
     isActive: true,
     isAdmin: false,
   });
+
   try {
-    await newUser.save();
+    const savedUser = await newUser.save();
+    const token = jwt.sign(
+      {
+        id: savedUser._id,
+        email: savedUser.email,
+        isAdmin: savedUser.isAdmin,
+      }, 
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: '1h' }
+    );
+
     res.status(201).json({
-      data: null,
-      message: 'Usuario creado exitosamente.',
+      token,
+      message: 'Usuario creado y logueado exitosamente.',
     });
+
   } catch (e) {
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,
         message: 'El correo ya está en uso.',
       });
-      return;
+    } else {
+      res.status(500).json({
+        data: null,
+        message: 'Ocurrió un error guardando el usuario.',
+      });
     }
-    res.status(500).json({
-      data: null,
-      message: 'Ocurrió un error guardando el usuario.',
-    });
   }
 };
 
