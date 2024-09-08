@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import UserModel from '../models/userSchema.js';
-import { jwtDecode } from 'jwt-decode';
+import jwt from 'jsonwebtoken';
 
 export const getUsers = async (_, res) => {
   try {
