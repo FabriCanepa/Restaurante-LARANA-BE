@@ -35,7 +35,6 @@ export const postUser = async (req, res) => {
   const newUser = UserModel({
     firstname: body.firstname,
     lastname: body.lastname,
-    username: body.username,
     email: body.email,
     password: hashedPassword,
     isActive: true,
@@ -46,19 +45,20 @@ export const postUser = async (req, res) => {
     const savedUser = await newUser.save();
     const token = jwt.sign(
       {
+        firstname: body.firstname,
+        lastname: body.lastname,
         id: savedUser._id,
         email: savedUser.email,
         isAdmin: savedUser.isAdmin,
-      }, 
+      },
       process.env.JWT_SECRET_KEY,
-      { expiresIn: '1h' }
+      { expiresIn: '1h' },
     );
 
     res.status(201).json({
       token,
       message: 'Usuario creado y logueado exitosamente.',
     });
-
   } catch (e) {
     if (e.message.includes('duplicate')) {
       res.status(400).json({
