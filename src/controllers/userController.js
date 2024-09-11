@@ -96,8 +96,10 @@ export const putUser = async (req, res) => {
       return;
     }
     const updatedUser = await UserModel.findById(id);
+    const token = jwt.sign({ user: updatedUser }, SECRET_KEY, { expiresIn: '1h' });
     res.json({
       data: updatedUser,
+      token,
       message: 'El usuario ha sido actualizado exitosamente',
     });
   } catch (e) {
