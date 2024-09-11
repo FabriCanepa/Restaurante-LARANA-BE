@@ -34,7 +34,7 @@ export const postProduct = async (req, res) => {
     name: body.name,
     cost: body.cost,
     ingredients: body.ingredients,
-    isAvailable: true,
+    isAvailable: body.isAvailable,
     isActive: true,
   });
   try {
