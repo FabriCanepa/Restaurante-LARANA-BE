@@ -95,18 +95,16 @@ export const putUser = async (req, res) => {
       });
       return;
     }
-    const updatedUser = await UserModel.findById(id);
-    const token = jwt.sign({ user: updatedUser }, SECRET_KEY, { expiresIn: '1h' });
+
     res.json({
-      data: updatedUser,
-      token,
+      data: null,
       message: 'El usuario ha sido actualizado exitosamente',
     });
   } catch (e) {
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,
-        message: 'El corro registrado ya esta en uso',
+        message: 'El nombre de usuario ya está en uso',
       });
       return;
     }
