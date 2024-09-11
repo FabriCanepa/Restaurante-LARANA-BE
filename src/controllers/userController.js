@@ -95,16 +95,16 @@ export const putUser = async (req, res) => {
       });
       return;
     }
-
+    const updatedUser = await UserModel.findById(id);
     res.json({
-      data: null,
+      data: updatedUser,
       message: 'El usuario ha sido actualizado exitosamente',
     });
   } catch (e) {
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,
-        message: 'El nombre de usuario ya está en uso',
+        message: 'El corro registrado ya esta en uso',
       });
       return;
     }
