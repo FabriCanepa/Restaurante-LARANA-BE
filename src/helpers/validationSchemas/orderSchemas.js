@@ -24,7 +24,7 @@ export const post_orderSchema = Joi.object({
           .required()
           .messages({
                 'string.min': 'The "ingredients" field must have at least 3 characters.',
-                'string.max': 'The "ingredients" field must have at least 3 characters.',
+                'string.max': 'The "ingredients" field must have at least 3000 characters.',
                 'any.required': 'The "ingredients" field is required.',
                 '*': 'Check the "ingredients" field.',
               }),
