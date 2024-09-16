@@ -20,7 +20,7 @@ export const post_orderSchema = Joi.object({
                 'any.required': 'The "cost" field is required.',
                 '*': 'Check the "cost" field.',
               }),
-          ingredients: Joi.string().trim().min(3).max(100)
+          ingredients: Joi.string().trim().min(3).max(3000)
           .required()
           .messages({
                 'string.min': 'The "ingredients" field must have at least 3 characters.',
