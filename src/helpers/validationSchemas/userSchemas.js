@@ -17,14 +17,6 @@ export const post_userSchema = Joi.object({
       'any.required': 'El campo lastname es requerido',
       '*': 'Revisa el campo lastname',
     }),
-  username: Joi.string().trim().min(3).max(25)
-    .required()
-    .messages({
-      'string.min': 'El campo username debe tener al menos 3 caracteres',
-      'string.max': 'El campo username debe tener, como mucho, 25 caracteres',
-      'any.required': 'El campo username es requerido',
-      '*': 'Revisa el campo username',
-    }),
   email: Joi.string().trim().min(3).max(25)
     .required()
     .messages({
@@ -75,6 +67,18 @@ export const put_userSchema = Joi.object({
       '*': 'Revisa el campo email',
     }),
   password: Joi.string()
+    .trim()
+    .min(3)
+    .max(15)
+    .regex(/^(?=.*[a-z])(?=.*[A-Z]).{8,15}$/)
+    .messages({
+      'string.min': 'El campo password debe tener al menos 6 caracteres',
+      'string.max': 'El campo password debe tener, como mucho, 15 caracteres',
+      'string.pattern.base':
+        'El campo "password" debe tener al menos un numero, una letra y un caracter especial',
+      '*': 'Revisa el campo password',
+    }),
+    password: Joi.string()
     .trim()
     .min(3)
     .max(15)

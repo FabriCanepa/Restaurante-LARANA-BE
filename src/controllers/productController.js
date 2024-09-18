@@ -3,14 +3,17 @@ import productModel from '../models/productSchema.js';
 export const getProducts = async (_, res) => {
   try {
     const data = await productModel.find({});
+    console.log(data)
     const filteredData = data
       .filter((product) => product._doc.isActive === true)
       .map((product) => ({
         id: product._doc._id,
+        _id: undefined,
         image: product._doc.image,
         name: product._doc.name,
         cost: product._doc.cost,
         ingredients: product._doc.ingredients,
+        isAvailable: product._doc.isAvailable
 
       }));
 
@@ -31,6 +34,7 @@ export const postProduct = async (req, res) => {
     name: body.name,
     cost: body.cost,
     ingredients: body.ingredients,
+    isAvailable: body.isAvailable,
     isActive: true,
   });
   try {

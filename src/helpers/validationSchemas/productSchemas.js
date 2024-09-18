@@ -7,10 +7,10 @@ export const post_productSchema = Joi.object({
       'any.required': 'El campo image es requerido',
       '*': 'Revisa el campo image',
     }),
-  name: Joi.string().trim().min(4).max(30)
+  name: Joi.string().trim().min(3).max(30)
     .required()
     .messages({
-      'string.min': 'El campo name debe tener al menos 4 caracteres',
+      'string.min': 'El campo name debe tener al menos 3 caracteres',
       'string.max': 'El campo name debe tener, como mucho, 30 caracteres',
       'any.required': 'El campo name es requerido',
       '*': 'Revisa el campo name',
@@ -19,13 +19,16 @@ export const post_productSchema = Joi.object({
     'any.required': 'El campo cost es requerido',
     '*': 'Revisa el campo const',
   }),
-  ingredients: Joi.string().trim().min(5).max(500)
+  ingredients: Joi.string().trim().min(3).max(3000)
     .required()
     .messages({
-      'string.min': 'El campo ingredients debe tener al menos 5 caracteres',
-      'string.max': 'El campo ingredients debe tener, como mucho, 500 caracteres',
+      'string.min': 'El campo ingredients debe tener al menos 3 caracteres',
+      'string.max': 'El campo ingredients debe tener, como mucho, 3000 caracteres',
       'any.required': 'El campo ingredients es requerido',
       '*': 'Revisa el campo ingredients',
+    }),
+    isAvailable: Joi.boolean().optional().messages({
+      '*': 'Revisa el campo isAvailable',
     }),
 });
 
@@ -34,20 +37,23 @@ export const put_productSchema = Joi.object({
     'string.uri': 'El campo image debe ser una URL válida',
     '*': 'Revisa el campo image',
   }),
-  name: Joi.string().trim().min(4).max(30)
+  name: Joi.string().trim().min(3).max(30)
     .messages({
-      'string.min': 'El campo name debe tener al menos 4 caracteres',
+      'string.min': 'El campo name debe tener al menos 3 caracteres',
       'string.max': 'El campo name debe tener, como mucho, 30 caracteres',
       '*': 'Revisa el campo name',
     }),
   cost: Joi.number().messages({
     '*': 'Revisa el campo const',
   }),
-  ingredients: Joi.string().trim().min(5).max(500)
+  ingredients: Joi.string().trim().min(3).max(3000)
     .messages({
-      'string.min': 'El campo ingredients debe tener al menos 5 caracteres',
-      'string.max': 'El campo ingredients debe tener, como mucho, 500 caracteres',
+      'string.min': 'El campo ingredients debe tener al menos 3 caracteres',
+      'string.max': 'El campo ingredients debe tener, como mucho, 3000 caracteres',
       '*': 'Revisa el campo ingredients',
+    }),
+    isAvailable: Joi.boolean().optional().messages({
+      '*': 'Revisa el campo isAvailable',
     }),
 }).custom((value, helper) => {
   const {

@@ -12,7 +12,6 @@ export const postLogin = async (req, res) => {
 
   try {
     const userInDB = await UserModel.findOne({ email, isActive: true });
-
     if (!userInDB || !bcrypt.compareSync(password, userInDB.password)) {
       res.status(400).json({
         data: null,
@@ -23,7 +22,7 @@ export const postLogin = async (req, res) => {
 
     const userInfo = {
       user: {
-        id: userInDB._doc.id,
+        id: userInDB._doc._id,
         firstname: userInDB._doc.firstname,
         lastname: userInDB._doc.lastname,
         username: userInDB._doc.username,

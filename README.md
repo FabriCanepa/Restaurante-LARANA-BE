@@ -53,8 +53,8 @@ Ruta principal: `/api/v1/users`
 | ------ | -------- | --------- | -------------- | ----------- | ---- |
 | GET | `/` | ✅ | ✅ | Obtiene todos los usuarios | - |
 | GET | `/:id` | ✅ | ❌ | Obtiene un usuario por su id | - |
-| POST | `/` | ❌ | ❌ | Crea un nuevo usuario | `{ firstname: string, lastname: string, password: string, username: string, email: string }` |
-| PUT | `/:id` | ✅ | ❌ | Actualiza un usuario por su id | `{ isAdmin?: boolean, lastname?: string, firstname?: string, password?: string, username?: string, email?: string }` |
+| POST | `/` | ❌ | ❌ | Crea un nuevo usuario | `{ firstname: string, lastname: string, password: string, email: string }` |
+| PUT | `/:id` | ✅ | ❌ | Actualiza un usuario por su id | `{ isAdmin?: boolean, lastname?: string, firstname?: string, password?: string, email?: string }` |
 | DELETE | `/:id` | ✅ | ❌ | Elimina un usuario por su id (borrado lógico) | - |
 
 #### Autenticación:
@@ -76,8 +76,6 @@ Ruta principal: `/api/v1/products`
 | DELETE | `/:id` | ✅ | ✅ | Elimina un producto por su id (borrado lógico) | - |
 
 ## Equipo
-
-- [Vecino Facundo](https://github.com/FacundoVecino)
 - [Iñigo Enzo](https://github.com/einigo)
 - [Gunsett Alexis](https://github.com/mauricio-gunsett)
 - [Canepa Fabricio](https://github.com/FabriCanepa)

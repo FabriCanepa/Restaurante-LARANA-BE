@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import UserModel from '../models/userSchema.js';
+import jwt from 'jsonwebtoken';
 
 export const getUsers = async (_, res) => {
   try {
@@ -8,7 +9,8 @@ export const getUsers = async (_, res) => {
     const filteredData = data
       .filter((user) => user._doc.isActive === true)
       .map((user) => ({
-        id: user._doc.id,
+        id: user._doc._id,
+        _id: undefined,
         firstname: user._doc.firstname,
         lastname: user._doc.lastname,
         username: user._doc.username,
@@ -33,30 +35,42 @@ export const postUser = async (req, res) => {
   const newUser = UserModel({
     firstname: body.firstname,
     lastname: body.lastname,
-    username: body.username,
     email: body.email,
     password: hashedPassword,
     isActive: true,
     isAdmin: false,
   });
+
   try {
-    await newUser.save();
+    const savedUser = await newUser.save();
+    const token = jwt.sign(
+      {
+        firstname: body.firstname,
+        lastname: body.lastname,
+        id: savedUser._id,
+        email: savedUser.email,
+        isAdmin: savedUser.isAdmin,
+      },
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: '1h' },
+    );
+
     res.status(201).json({
-      data: null,
-      message: 'Usuario creado exitosamente.',
+      token,
+      message: 'Usuario creado y logueado exitosamente.',
     });
   } catch (e) {
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,
-        message: 'El nombre de usuario ya está en uso.',
+        message: 'El correo ya está en uso.',
       });
-      return;
+    } else {
+      res.status(500).json({
+        data: null,
+        message: 'Ocurrió un error guardando el usuario.',
+      });
     }
-    res.status(500).json({
-      data: null,
-      message: 'Ocurrió un error guardando el usuario.',
-    });
   }
 };
 
