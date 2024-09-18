@@ -33,3 +33,4 @@ router.put(
 router.delete('/:id', isAuthenticated, deleteUser);
 
 export default router;
+ 
