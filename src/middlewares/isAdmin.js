@@ -5,7 +5,7 @@ export const isAdmin = (req, res, next) => {
   if (!user.isAdmin) {
     res.status(403).json({
       data: null,
-      message: 'No tienes acceso a este recurso',
+      message: 'You do not have access to this resource',
     });
     return;
   }

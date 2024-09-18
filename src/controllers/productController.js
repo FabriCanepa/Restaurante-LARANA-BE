@@ -17,11 +17,11 @@ export const getProducts = async (_, res) => {
 
       }));
 
-    res.json({ data: filteredData, message: 'Productos encontrados' });
+    res.json({ data: filteredData, message: 'Products found' });
   } catch (e) {
     res.status(500).json({
       data: null,
-      message: 'Ocurrió un error al conectarse con la base de datos',
+      message: 'An error occurred while connecting to the database',
     });
   }
 };
@@ -42,19 +42,19 @@ export const postProduct = async (req, res) => {
 
     res.status(201).json({
       data: null,
-      message: 'Producto creado exitosamente.',
+      message: 'Successfully created product.',
     });
   } catch (e) {
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,
-        message: 'El nombre de producto ya está en uso.',
+        message: 'Product name is already in use.',
       });
       return;
     }
     res.status(500).json({
       data: null,
-      message: 'Ocurrió un error guardando el producto.',
+      message: 'An error occurred saving the product.',
     });
   }
 };
@@ -71,27 +71,27 @@ export const putProduct = async (req, res) => {
     if (action.matchedCount === 0) {
       res.status(400).json({
         data: null,
-        message: 'No se encontró un producto con ese id',
+        message: 'No product found with that id',
       });
       return;
     }
 
     res.json({
       data: null,
-      message: 'El producto ha sido actualizado exitosamente',
+      message: 'The product has been successfully updated',
     });
   } catch (e) {
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,
-        message: 'El nombre de producto ya está en uso',
+        message: 'Product name is already in use',
       });
       return;
     }
 
     res.status(500).json({
       data: null,
-      message: 'Ocurrió un error actualizando el producto',
+      message: 'An error occurred updating the product',
     });
   }
 };
@@ -110,19 +110,19 @@ export const deleteProduct = async (req, res) => {
     if (action.matchedCount === 0) {
       res.status(400).json({
         data: null,
-        message: 'No se encontró un producto con ese id',
+        message: 'No product found with that id',
       });
       return;
     }
 
     res.json({
       data: null,
-      message: 'El producto ha sido eliminado exitosamente',
+      message: 'The product has been successfully removed',
     });
   } catch (e) {
     res.status(500).json({
       data: null,
-      message: 'Ocurrió un error eliminando el producto',
+      message: 'An error occurred deleting the product',
     });
   }
 };

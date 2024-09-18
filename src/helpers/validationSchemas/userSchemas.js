@@ -4,26 +4,26 @@ export const post_userSchema = Joi.object({
   firstname: Joi.string().trim().min(3).max(25)
     .required()
     .messages({
-      'string.min': 'El campo firstname debe tener al menos 3 caracteres',
-      'string.max': 'El campo firstname debe tener, como mucho, 25 caracteres',
-      'any.required': 'El campo firstname es requerido',
-      '*': 'Revisa el campo firstname',
+      'string.min': 'The firstname field must be at least 3 characters',
+      'string.max': 'The firstname field must be at most 25 characters',
+      'any.required': 'The firstname field is required',
+      '*': 'Check the firstname field',
     }),
   lastname: Joi.string().trim().min(3).max(25)
     .required()
     .messages({
-      'string.min': 'El campo lastname debe tener al menos 3 caracteres',
-      'string.max': 'El campo lastname debe tener, como mucho, 25 caracteres',
-      'any.required': 'El campo lastname es requerido',
-      '*': 'Revisa el campo lastname',
+      'string.min': 'The lastname field must be at least 3 characters',
+      'string.max': 'The lastname field must be at most 25 characters',
+      'any.required': 'The lastname field is required',
+      '*': 'Check the lastname field',
     }),
   email: Joi.string().trim().min(3).max(25)
     .required()
     .messages({
-      'string.min': 'El campo email debe tener al menos 3 caracteres',
-      'string.max': 'El campo email debe tener, como mucho, 25 caracteres',
-      'any.required': 'El campo email es requerido',
-      '*': 'Revisa el campo email',
+      'string.min': 'The email field must be at least 3 characters',
+      'string.max': 'The email field must have, at most, 25 characters',
+      'any.required': 'The email field is required',
+      '*': 'Check the email field',
     }),
   password: Joi.string()
     .trim()
@@ -32,39 +32,39 @@ export const post_userSchema = Joi.object({
     .required()
     .regex(/^(?=.*[a-z])(?=.*[A-Z]).{8,15}$/)
     .messages({
-      'string.min': 'El campo password debe tener al menos 6 caracteres',
-      'string.max': 'El campo password debe tener, como mucho, 15 caracteres',
-      'any.required': 'El campo password es requerido',
+      'string.min': 'The password field must have at least 6 characters',
+      'string.max': 'The password field must be at most 15 characters',
+      'any.required': 'The password field is required',
       'string.pattern.base':
-        'La contraseña debe contener al menos una letra minúscula, una letra mayúscula y tener una longitud entre 8 y 15 caracteres.',
-      '*': 'Revisa el campo password',
+        'The password must contain at least one lowercase letter, one uppercase letter, and be between 8 and 15 characters long.',
+      '*': 'Check the password field',
     }),
 });
 
 export const put_userSchema = Joi.object({
   firstname: Joi.string().trim().min(3).max(25)
     .messages({
-      'string.min': 'El campo firstname debe tener al menos 3 caracteres',
-      'string.max': 'El campo firstname debe tener, como mucho, 25 caracteres',
-      '*': 'Revisa el campo firstname',
+      'string.min': 'The firstname field must be at least 3 characters',
+      'string.max': 'The firstname field must be at most 25 characters',
+      '*': 'Check the firstname field',
     }),
   lastname: Joi.string().trim().min(3).max(25)
     .messages({
-      'string.min': 'El campo lastname debe tener al menos 3 caracteres',
-      'string.max': 'El campo lastname debe tener, como mucho, 25 caracteres',
+      'string.min': 'The lastname field must be at least 3 characters',
+      'string.max': 'The lastname field must be at most 25 characters',
       '*': 'Revisa el campo lastname',
     }),
   username: Joi.string().trim().min(3).max(25)
     .messages({
-      'string.min': 'El campo username debe tener al menos 3 caracteres',
-      'string.max': 'El campo username debe tener, como mucho, 25 caracteres',
-      '*': 'Revisa el campo username',
+      'string.min': 'The username field must be at least 3 characters',
+      'string.max': 'The username field must have, at most, 25 characters',
+      '*': 'Check the username field',
     }),
   email: Joi.string().trim().min(3).max(25)
     .messages({
-      'string.min': 'El campo email debe tener al menos 3 caracteres',
-      'string.max': 'El campo email debe tener, como mucho, 25 caracteres',
-      '*': 'Revisa el campo email',
+      'string.min': 'The email field must be at least 3 characters',
+      'string.max': 'The email field must have, at most, 25 characters',
+      '*': 'Check the email field',
     }),
   password: Joi.string()
     .trim()
@@ -72,22 +72,10 @@ export const put_userSchema = Joi.object({
     .max(15)
     .regex(/^(?=.*[a-z])(?=.*[A-Z]).{8,15}$/)
     .messages({
-      'string.min': 'El campo password debe tener al menos 6 caracteres',
-      'string.max': 'El campo password debe tener, como mucho, 15 caracteres',
+      'string.min': 'The password field must be at least 6 characters',
+      'string.max': 'The password field must have, at most, 15 characters',
       'string.pattern.base':
-        'El campo "password" debe tener al menos un numero, una letra y un caracter especial',
-      '*': 'Revisa el campo password',
-    }),
-    password: Joi.string()
-    .trim()
-    .min(3)
-    .max(15)
-    .regex(/^(?=.*[a-z])(?=.*[A-Z]).{8,15}$/)
-    .messages({
-      'string.min': 'El campo password debe tener al menos 6 caracteres',
-      'string.max': 'El campo password debe tener, como mucho, 15 caracteres',
-      'string.pattern.base':
-        'El campo "password" debe tener al menos un numero, una letra y un caracter especial',
+        'The "password" field must have at least one number, one letter and one special character',
       '*': 'Revisa el campo password',
     }),
 }).custom((value, helper) => {
@@ -96,7 +84,7 @@ export const put_userSchema = Joi.object({
   } = value;
 
   if (!firstname && !lastname && !username && !email && !password) {
-    return helper.message('Al menos un campo debe estar presente en el body');
+    return helper.message('At least one field must be present in the body');
   }
 
   return true;

@@ -15,7 +15,7 @@ export const postLogin = async (req, res) => {
     if (!userInDB || !bcrypt.compareSync(password, userInDB.password)) {
       res.status(400).json({
         data: null,
-        message: 'Usuario o contraseña incorrecta.',
+        message: 'Incorrect username or password.',
       });
       return;
     }
@@ -37,12 +37,12 @@ export const postLogin = async (req, res) => {
 
     res.json({
       data: token,
-      message: 'Usuario logueado exitosamente',
+      message: 'User successfully logged in',
     });
   } catch (e) {
     res.status(500).json({
       data: null,
-      message: 'Ocurrió un error en el inicio de sesión',
+      message: 'An error occurred during login',
     });
   }
 };
