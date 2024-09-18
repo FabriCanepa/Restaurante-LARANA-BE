@@ -10,7 +10,7 @@ export const isAuthenticated = (req, res, next) => {
   if (!authHeader) {
     res.status(401).json({
       data: null,
-      message: 'El header "Authorization" no está presente en la petición',
+      message: 'Authentication required. Please log in.',
     });
     return;
   }
@@ -25,7 +25,7 @@ export const isAuthenticated = (req, res, next) => {
   } catch (e) {
     res.status(401).json({
       data: null,
-      message: 'Token inválido o expirado',
+      message: 'Invalid or expired token',
     });
   }
 };

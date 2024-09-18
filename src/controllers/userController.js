@@ -18,11 +18,11 @@ export const getUsers = async (_, res) => {
         isAdmin: user._doc.isAdmin,
       }));
 
-    res.json({ data: filteredData, message: 'Usuarios encontrados' });
+    res.json({ data: filteredData, message: 'Users found' });
   } catch (e) {
     res.status(500).json({
       data: null,
-      message: 'Ocurrió un error al conectarse con la base de datos',
+      message: 'An error occurred while connecting to the database',
     });
   }
 };
@@ -57,18 +57,18 @@ export const postUser = async (req, res) => {
 
     res.status(201).json({
       token,
-      message: 'Usuario creado y logueado exitosamente.',
+      message: 'User created and logged in successfully.',
     });
   } catch (e) {
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,
-        message: 'El correo ya está en uso.',
+        message: 'The email is already in use.',
       });
     } else {
       res.status(500).json({
         data: null,
-        message: 'Ocurrió un error guardando el usuario.',
+        message: 'An error occurred saving the user.',
       });
     }
   }
@@ -91,27 +91,27 @@ export const putUser = async (req, res) => {
     if (action.matchedCount === 0) {
       res.status(400).json({
         data: null,
-        message: 'No se encontró un usuario con ese id',
+        message: 'A user with that id was not found',
       });
       return;
     }
 
     res.json({
       data: null,
-      message: 'El usuario ha sido actualizado exitosamente',
+      message: 'The user has been successfully updated',
     });
   } catch (e) {
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,
-        message: 'El nombre de usuario ya está en uso',
+        message: 'Username is already in use',
       });
       return;
     }
 
     res.status(500).json({
       data: null,
-      message: 'Ocurrió un error actualizando el usuario',
+      message: 'An error occurred updating the user',
     });
   }
 };
@@ -130,19 +130,19 @@ export const deleteUser = async (req, res) => {
     if (action.matchedCount === 0) {
       res.status(400).json({
         data: null,
-        message: 'No se encontró un usuario con ese id',
+        message: 'A user with that id was not found',
       });
       return;
     }
 
     res.json({
       data: null,
-      message: 'El usuario ha sido eliminado exitosamente',
+      message: 'The user has been successfully deleted',
     });
   } catch (e) {
     res.status(500).json({
       data: null,
-      message: 'Ocurrió un error eliminando el usuario',
+      message: 'An error occurred deleting the user',
     });
   }
 };
