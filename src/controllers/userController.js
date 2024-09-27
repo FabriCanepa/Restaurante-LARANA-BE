@@ -63,7 +63,7 @@ export const postUser = async (req, res) => {
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,
-        message: 'El correo ya está en uso.',
+        message: 'El correo ya está en uso, por favor verifica el mismo.',
       });
     } else {
       res.status(500).json({
