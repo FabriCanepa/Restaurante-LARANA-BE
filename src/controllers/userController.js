@@ -29,40 +29,35 @@ export const getUsers = async (_, res) => {
 
 export const postUser = async (req, res) => {
   const { body } = req;
-  console.log(body);
 
   const hashedPassword = bcrypt.hashSync(body.password, 10);
 
-  const newUser = new UserModel({
+  const newUser = UserModel({
     firstname: body.firstname,
     lastname: body.lastname,
+    username: body.username,
     email: body.email,
     password: hashedPassword,
     isActive: true,
     isAdmin: false,
   });
-
   try {
     await newUser.save();
-    // await sendWelcomeEmail(newUser);
-
     res.status(201).json({
       data: null,
-      message: 'User created successfully',
+      message: 'Usuario creado exitosamente.',
     });
   } catch (e) {
-    console.log(e);
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,
-        message: 'Email is already in use',
+        message: 'El correo ya está en uso.',
       });
       return;
     }
-
     res.status(500).json({
       data: null,
-      message: 'An error occurred saving the user',
+      message: 'Ocurrió un error guardando el usuario.',
     });
   }
 };
