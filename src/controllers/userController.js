@@ -29,10 +29,11 @@ export const getUsers = async (_, res) => {
 
 export const postUser = async (req, res) => {
   const { body } = req;
+  console.log(body);
 
   const hashedPassword = bcrypt.hashSync(body.password, 10);
 
-  const newUser = UserModel({
+  const newUser = new UserModel({
     firstname: body.firstname,
     lastname: body.lastname,
     email: body.email,
@@ -42,35 +43,27 @@ export const postUser = async (req, res) => {
   });
 
   try {
-    const savedUser = await newUser.save();
-    const token = jwt.sign(
-      {
-        firstname: body.firstname,
-        lastname: body.lastname,
-        id: savedUser._id,
-        email: savedUser.email,
-        isAdmin: savedUser.isAdmin,
-      },
-      process.env.JWT_SECRET_KEY,
-      { expiresIn: '1h' },
-    );
+    await newUser.save();
+    // await sendWelcomeEmail(newUser);
 
     res.status(201).json({
-      token,
-      message: 'User created and logged in successfully.',
+      data: null,
+      message: 'User created successfully',
     });
   } catch (e) {
+    console.log(e);
     if (e.message.includes('duplicate')) {
       res.status(400).json({
         data: null,
-        message: 'The email is already in use.',
+        message: 'Email is already in use',
       });
-    } else {
-      res.status(500).json({
-        data: null,
-        message: 'An error occurred saving the user.',
-      });
+      return;
     }
+
+    res.status(500).json({
+      data: null,
+      message: 'An error occurred saving the user',
+    });
   }
 };
 
