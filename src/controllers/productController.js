@@ -3,7 +3,7 @@ import productModel from '../models/productSchema.js';
 export const getProducts = async (_, res) => {
   try {
     const data = await productModel.find({});
-    console.log(data)
+    console.log(data);
     const filteredData = data
       .filter((product) => product._doc.isActive === true)
       .map((product) => ({
@@ -13,8 +13,7 @@ export const getProducts = async (_, res) => {
         name: product._doc.name,
         cost: product._doc.cost,
         ingredients: product._doc.ingredients,
-        isAvailable: product._doc.isAvailable
-
+        isAvailable: product._doc.isAvailable,
       }));
 
     res.json({ data: filteredData, message: 'Products found' });
