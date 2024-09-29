@@ -5,12 +5,12 @@ export const getOrders = async (_, res) => {
     const data = await OrderModel.find({});
 
     const filteredData = data
-    .filter((order) => order._doc.isActive === true)
-    .map((order) => ({
-      id: order._doc._id,
-      productsOrdered: order._doc.productsOrdered,
-      userId: order._doc.userId,
-    }));
+      .filter((order) => order._doc.isActive === true)
+      .map((order) => ({
+        id: order._doc._id,
+        productsOrdered: order._doc.productsOrdered,
+        userId: order._doc.userId,
+      }));
 
     res.json({ data: filteredData, message: 'Orders found' });
   } catch (e) {
